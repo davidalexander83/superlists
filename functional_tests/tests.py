@@ -109,8 +109,8 @@ class NewVisitorTest(LiveServerTestCase):
 
     # Francis gets his own unique URL
     francis_list_url = self.browser.current_url
-    self.assertRegex(francis_list_url, '/lists/.+')
-    self.assertRegex(francis_list_url, edith_list_url)
+    self.assertRegex(francis_list_url, '/lists/\d+')
+    self.assertNotRegex(francis_list_url, edith_list_url)
 
     # Again, there is no trace of Edith's list
     page_text = self.browser.find_element(By.TAG_NAME, 'body').text
@@ -118,4 +118,3 @@ class NewVisitorTest(LiveServerTestCase):
     self.assertIn('Buy milk', page_text)
 
     # Satisfied, they both go back to sleep
-    self.fail('Finish the test!')
