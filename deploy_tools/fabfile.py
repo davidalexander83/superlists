@@ -1,5 +1,6 @@
 from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
+from collections import Mapping
 import random
 
 REPO_URL = 'https://github.com/davidalexander83/superlists.git'
