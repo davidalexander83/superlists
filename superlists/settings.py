@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_COOKIE_DOMAIN = "*.superlists.example"
+
 ROOT_URLCONF = 'superlists.urls'
 
 TEMPLATES = [
