@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fvs*awv^p+rx^ryg!t7slja4%e)de=u#q(6%x+)^zbocva=ktg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ubuntustaging.superlists.example']
 
 
 # Application definition
