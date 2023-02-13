@@ -1,6 +1,5 @@
 from fabric.contrib.files import append, exists, sed
 from fabric.api import env, local, run
-from collections import Mapping
 import random
 
 REPO_URL = 'https://github.com/davidalexander83/superlists.git'
@@ -45,7 +44,7 @@ def _update_virtualenv(source_folder):
   virtualenv_folder = source_folder + '/../virtualenv'
   if not exists(virtualenv_folder + '/bin/pip'):
     run(f'python3.10 -m venv {virtualenv_folder}')
-  run(f'{virtualenv_folder}/bin/pip/install -r {source_folder}/requirements.txt')
+  run(f'{virtualenv_folder}/bin/pip install -r {source_folder}/requirements.txt')
 
 def _update_static_files(source_folder):
   run(
