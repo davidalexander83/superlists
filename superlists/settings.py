@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_TRUSTED_ORIGINS = ["*.superlists.example"]
+CSRF_TRUSTED_ORIGINS = ["http://*.superlists.example"]
 
 ROOT_URLCONF = 'superlists.urls'
 
