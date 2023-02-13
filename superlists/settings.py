@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CSRF_COOKIE_DOMAIN = "*.superlists.example"
+CSRF_TRUSTED_ORIGINS = ["*.superlists.example"]
 
 ROOT_URLCONF = 'superlists.urls'
 
