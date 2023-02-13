@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn server for ubuntustaging.superlists.example
+
+[Service]
+Restart=on-failure
+User=david
+WorkingDirectory=/home/david/sites/ubuntustaging.superlists.example/source
+ExecStart=/home/david/sites/ubuntustaging.superlists.example/virtualenv/bin/gunicorn --bind unix:/tmp/ubuntustaging.superlists.example.socket superlists.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
