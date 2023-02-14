@@ -70,8 +70,11 @@ def _update_configurations(source_folder):
   sed(gunicorn_conf, "SITENAME", f'{env.host}')
   run(
     f'sudo mv {nginx_conf} /etc/nginx/sites-available/{env.host}'
-    f' && sudo ln -s /etc/nginx/sites-available/{env.host} /etc/nginx/sites-enabled/{env.host}'
   )
   run(
     f'sudo mv {gunicorn_conf} /etc/systemd/system/gunicorn-{env.host}.service'
   )
+  if not exists(f'/etc/nginx/sites-enabled/{env.host}'):
+    run(
+      f'sudo ln -s /etc/nginx/sites-available/{env.host} /etc/nginx/sites-enabled/{env.host}'
+    )
