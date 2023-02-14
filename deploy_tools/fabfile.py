@@ -13,6 +13,7 @@ def deploy():
   _update_virtualenv(source_folder)
   _update_static_files(source_folder)
   _update_database(source_folder)
+  _update_configurations(source_folder)
 
 def _create_directory_structure_if_necessary(site_folder):
   for subfolder in ('database', 'static', 'virtualenv', 'source'):
@@ -56,4 +57,21 @@ def _update_database(source_folder):
   run(
     f'cd {source_folder}'
     ' && ../virtualenv/bin/python manage.py migrate --noinput'
+  )
+
+def _update_configurations(source_folder):
+  nginx_conf = source_folder + f'/deploy_tools/{env.host}'
+  gunicorn_conf = source_folder + f'/deploy_tools/gunicorn-{env.host}.service'
+  run(
+    f'cp {source_folder}/deploy_tools/nginx.template.conf {nginx_conf}'
+    f' && cp {source_folder}/deploy_tools/gunicorn-systemd.template.service {gunicorn_conf}'
+  )
+  sed(nginx_conf, "SITENAME", f'{env.host}')
+  sed(gunicorn_conf, "SITENAME", f'{env.host}')
+  run(
+    f'sudo mv {nginx_conf} /etc/nginx/sites-available/{env.host}'
+    f' && sudo ln -s /etc/nginx/sites-available/{env.host} /etc/nginx/sites-enabled/{env.host}'
+  )
+  run(
+    f'sudo mv {gunicorn_conf} /etc/systemd/system/gunicorn-{env.host}.service'
   )
