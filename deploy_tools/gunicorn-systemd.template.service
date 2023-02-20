@@ -3,6 +3,7 @@ Description=Gunicorn server for SITENAME
 
 [Service]
 Restart=on-failure
+Environment=EMAIL_PASSWORD=SEKRIT
 User=david
 WorkingDirectory=/home/david/sites/SITENAME/source
 ExecStart=/home/david/sites/ubuntustaging.superlists.example/virtualenv/bin/gunicorn --bind unix:/tmp/ubuntustaging.superlists.example.socket --capture-output --access-logfile ../access.log --error-logfile ../error.log superlists.wsgi:application

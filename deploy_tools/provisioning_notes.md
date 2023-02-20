@@ -42,6 +42,7 @@ CONFIGURE_OPTS="--with-openssl=/usr/local --with-openssl-rpath=auto" pyenv insta
 
 * see gunicorn-systemd.template.service
 * replace SITENAME with e.g. staging.domain.com
+* replace SEKRIT with the EMAIL_PASSWORD
 
 ## Folder Structure
 
