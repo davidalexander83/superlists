@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-fvs*awv^p+rx^ryg!t7slja4%e)de=u#q(6%x+)^zbocva=ktg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ubuntustaging.superlists.example']
+ALLOWED_HOSTS = ['localhost', 'ubuntustaging.superlists.example']
 
 
 # Application definition
@@ -39,7 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lists',
+    'accounts',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = [
+    'accounts.authentication.PasswordlessAuthenticationBackend'
+]
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'superlists.example@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
