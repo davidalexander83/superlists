@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-fvs*awv^p+rx^ryg!t7slja4%e)de=u#q(6%x+)^zbocva=ktg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'ubuntustaging.superlists.example']
+ALLOWED_HOSTS = ["ubuntustaging.superlists.example"]
 
 
 # Application definition
@@ -84,6 +84,23 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'superlists.wsgi.application'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+        },
+    },
+    'root': {'level': 'INFO'},
+}
 
 
 # Database
