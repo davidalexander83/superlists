@@ -4,7 +4,7 @@ import random
 
 REPO_URL = 'https://github.com/davidalexander83/superlists.git'
 
-def deploy():
+def deploy(email_password):
   site_folder = f'/home/{env.user}/sites/{env.host}'
   source_folder = site_folder + '/source'
   _create_directory_structure_if_necessary(site_folder)
@@ -13,7 +13,7 @@ def deploy():
   _update_virtualenv(source_folder)
   _update_static_files(source_folder)
   _update_database(source_folder)
-  _update_configurations(source_folder)
+  _update_configurations(source_folder, email_password)
 
 def _create_directory_structure_if_necessary(site_folder):
   for subfolder in ('database', 'static', 'virtualenv', 'source'):
@@ -59,7 +59,7 @@ def _update_database(source_folder):
     ' && ../virtualenv/bin/python manage.py migrate --noinput'
   )
 
-def _update_configurations(source_folder):
+def _update_configurations(source_folder, email_password):
   nginx_conf = source_folder + f'/deploy_tools/{env.host}'
   gunicorn_conf = source_folder + f'/deploy_tools/gunicorn-{env.host}.service'
   run(
@@ -68,6 +68,7 @@ def _update_configurations(source_folder):
   )
   sed(nginx_conf, "SITENAME", f'{env.host}')
   sed(gunicorn_conf, "SITENAME", f'{env.host}')
+  sed(gunicorn_conf, "SEKRIT", email_password)
   run(
     f'sudo mv {nginx_conf} /etc/nginx/sites-available/{env.host}'
   )
