@@ -1,4 +1,4 @@
 django
 gunicorn
 selenium
-fabric
+fabric3
