@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "qunit-phantomjs-runner": "^2.4.2"
+  }
+}
